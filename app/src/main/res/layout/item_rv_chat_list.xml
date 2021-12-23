@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="chatListItemViewState"
+            type="com.berker.whatsappclone.ui.chat.adapter.ChatListItemViewState" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -30,7 +38,8 @@
             app:layout_constraintGuide_percent="0.5" />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image"
+            android:id="@+id/civProfileImage"
+            profilePictureUrl="@{chatListItemViewState.profilePicture}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:padding="8dp"
@@ -43,6 +52,7 @@
         <TextView
             android:id="@+id/tv_chat_header"
             style="@style/chat_header"
+            android:text="@{chatListItemViewState.name}"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintEnd_toStartOf="@+id/guideline4"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -52,6 +62,7 @@
         <TextView
             android:id="@+id/tv_chat_content"
             style="@style/chat_content"
+            lastMessageText="@{chatListItemViewState.lastMessage}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline4"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -60,11 +71,12 @@
 
         <TextView
             android:id="@+id/tv_chat_time"
+            style="@style/chat_time"
+            lastMessageTime="@{chatListItemViewState.lastMessageTime}"
             app:layout_constraintBottom_toTopOf="@+id/guideline3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="11:23"
-            style="@style/chat_time" />
+            tools:text="11:23" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

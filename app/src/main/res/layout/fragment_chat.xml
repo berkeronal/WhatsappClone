@@ -3,7 +3,9 @@
 
     <data>
 
-
+        <variable
+            name="adapter"
+            type="com.berker.whatsappclone.ui.chat.adapter.ChatListAdapter" />
     </data>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -13,8 +15,10 @@
         tools:context=".ui.chat.ChatFragment">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvChat"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:adapter="@{adapter}" />
 
     </FrameLayout>
 </layout>

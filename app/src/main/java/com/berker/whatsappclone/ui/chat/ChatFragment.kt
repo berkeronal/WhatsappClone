@@ -1,26 +1,38 @@
 package com.berker.whatsappclone.ui.chat
 
 import android.os.Bundle
+import android.transition.TransitionInflater
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.berker.whatsappclone.R
+import com.berker.whatsappclone.databinding.FragmentChatBinding
+import com.berker.whatsappclone.ui.base.BaseFragment
+import com.berker.whatsappclone.ui.chat.adapter.ChatListAdapter
 
 
-class ChatFragment : Fragment() {
+class ChatFragment : BaseFragment<FragmentChatBinding>() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
+    private val chatListAdapter:ChatListAdapter by lazy {
+        ChatListAdapter().apply {
+            stateRestorationPolicy = RecyclerView.Adapter.StateRestorationPolicy.PREVENT_WHEN_EMPTY
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat, container, false)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val transition =
+            TransitionInflater.from(context).inflateTransition(R.transition.move_custom)
+        transition.duration = 600L
+        sharedElementEnterTransition = transition
+    }
+
+
+    override fun layoutId(): Int = R.layout.fragment_chat
+
+    override fun initUi() {
+
     }
 }
